@@ -121,7 +121,7 @@ namespace TrainingAPI.Controllers
         }
 
         //Post: api/Users/Edit
-        [HttpPut("Edit")]
+        [HttpPost("Edit")]
         public ActionResult<ResponseData<User>> EditUser(User user)
         {
             try
@@ -190,13 +190,13 @@ namespace TrainingAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult<ResponseData<User>> DeleteUser(int id)
+        [HttpPost("Delete")]
+        public ActionResult<ResponseData<User>> DeleteUser([FromForm]int userId)
         {
             try
             {
                 //Get theo id
-                var user = _context.Users.Find(id);
+                var user = _context.Users.Find(userId);
                 if (user == null)
                 {
                     return new ResponseData<User> { Message = "Không tìm thấy user thích hợp!" };
